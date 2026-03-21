@@ -1,22 +1,25 @@
-from setuptools import setup, find_packages # find_packages를 추가했습니다.
+from setuptools import setup, find_packages
 import os
 from glob import glob
 
-package_name = 'delivery_robot_gazebo' # delivery_robot_gazebo setup.py
+package_name = 'delivery_robot_gazebo'
 
 setup(
     name=package_name,
     version='0.0.0',
-    # 패키지 내의 파이썬 모듈을 자동으로 찾아주는 함수입니다.
     packages=find_packages(exclude=['test']), 
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        # [중요] Launch 파일들을 설치 폴더(install)로 복사합니다.
+        # Launch 파일 설치
         (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
-        # [중요] Gazebo 월드 파일들을 설치 폴더로 복사합니다.
-        (os.path.join('share', package_name, 'worlds'), glob('worlds/*')),
+        # World 파일 설치
+        (os.path.join('share', package_name, 'worlds'), glob('worlds/*.world')),
+        # [핵심] 모델 폴더 내의 모든 파일(config, sdf 등)을 설치 폴더로 복사
+        (os.path.join('share', package_name, 'models/my_house'), glob('models/my_house/*')),
+        # [핵심 추가] rviz 폴더 내의 모든 .rviz 파일을 설치 경로로 복사해라!
+        (os.path.join('share', package_name, 'rviz'), glob('rviz/*.rviz')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -26,9 +29,6 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-            # 나중에 파이썬 노드를 만들면 여기에 등록합니다.
-            # '노드이름 = 패키지명.파일명:메인함수'
-        ],
+        'console_scripts': [],
     },
 )

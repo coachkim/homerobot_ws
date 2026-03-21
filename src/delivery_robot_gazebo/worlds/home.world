@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://my_house</uri>
+      <name>my_house</name>
+      <pose>-1.489 1.756 0 0 0 0</pose>
+    </include>
+
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>1.126781 -4.515740 23.485903 0.000000 1.319642 1.604203</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>
