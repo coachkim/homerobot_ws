@@ -20,6 +20,8 @@ setup(
         (os.path.join('share', package_name, 'models/my_house'), glob('models/my_house/*')),
         # [핵심 추가] rviz 폴더 내의 모든 .rviz 파일을 설치 경로로 복사해라!
         (os.path.join('share', package_name, 'rviz'), glob('rviz/*.rviz')),
+        (os.path.join('share', package_name, 'maps'), glob('maps/*')), # 지도 폴더
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
