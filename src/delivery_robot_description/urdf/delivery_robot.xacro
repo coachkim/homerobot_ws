@@ -123,6 +123,13 @@
     <origin xyz="0.13 0 0.02" rpy="0 0 0"/> 
   </joint>
 
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </joint>
+
   <gazebo reference="base_link"><material>Gazebo/Grey</material></gazebo>
   <gazebo reference="top_plate"><material>Gazebo/White</material></gazebo>
   <gazebo reference="payload_link"><material>Gazebo/Blue</material></gazebo>
@@ -136,19 +143,20 @@
       <right_joint>front_right_wheel_joint</right_joint>
       <right_joint>rear_right_wheel_joint</right_joint>
       
-      <wheel_separation>0.245</wheel_separation>
+      <wheel_separation>0.28</wheel_separation>
       <wheel_diameter>0.065</wheel_diameter>
       <max_wheel_torque>5.0</max_wheel_torque>
       <max_wheel_acceleration>1.0</max_wheel_acceleration>
 
       <publish_odom>true</publish_odom>
-      <publish_odom_tf>true</publish_odom_tf> <publish_wheel_tf>true</publish_wheel_tf>
+      <publish_odom_tf>false</publish_odom_tf> <publish_wheel_tf>true</publish_wheel_tf>
       
       <odometry_frame>odom</odometry_frame>
       <robot_base_frame>base_footprint</robot_base_frame>
       
       <command_topic>cmd_vel</command_topic>
       <odometry_topic>odom</odometry_topic>
+      <odometry_source>encoder</odometry_source>
     </plugin>
   </gazebo>
 
@@ -197,6 +205,20 @@
     <mu2>0.1</mu2>
     <kp>1000000.0</kp>
     <kd>10.0</kd>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <sensor name="imu_sensor" type="imu">
+      <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+        <ros>
+          <remapping>~/out:=imu</remapping>
+        </ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+      </plugin>
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+    </sensor>
   </gazebo>
 
 </robot>
