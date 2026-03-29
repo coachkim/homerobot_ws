@@ -53,7 +53,11 @@ def generate_launch_description():
     spawn_entity = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-topic', 'robot_description', '-entity', 'delivery_robot'],
+        arguments=[
+            '-topic', 'robot_description', 
+            '-entity', 'delivery_robot',
+            '-z', '0.1'  # <--- 이 줄을 꼭 추가해 주세요!
+        ],
         output='screen'
     )
 

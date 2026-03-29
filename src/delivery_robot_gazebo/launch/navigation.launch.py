@@ -23,7 +23,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         # 1. EKF 노드 실행 (리스트에 추가!)
-        start_robot_localization_cmd,
+        #start_robot_localization_cmd,
 
         # 2. Nav2 Bringup 실행
         IncludeLaunchDescription(

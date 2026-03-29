@@ -11,18 +11,29 @@ ekf_filter_node:
     base_link_frame: base_footprint
     world_frame: odom
 
-    # 1. 바퀴 오도메트리 설정 (위치와 선속도만 믿음)
+    # 1. 바퀴 오도메트리: 위치 대신 '속도'만 사용 (이게 NaN 방지 핵심)
     odom0: /odom
-    odom0_config: [false, false, false, # x, y, z 위치
-                  false, false, false, # roll, pitch, yaw 각도
-                  true,  true,  false, # vx, vy, vz 선속도
-                  false, false, true,  # vroll, vpitch, vyaw 각속도
-                  false, false, false] # ax, ay, az 가속도
-
-    # 2. IMU 설정 (각속도와 방향만 믿음)
-    imu0: /imu
-    imu0_config: [false, false, false,
-                  false, false, true,  # yaw 각도 (방향)
-                  false, false, false,
-                  false, false, true,  # vyaw 각속도 (회전 속도)
+    odom0_config: [false, false, false, # 위치 X, Y, Z 버림
+                  false, false, false, # 방향 R, P, Y 버림 (1조 오차 방지)
+                  true,  true,  false, # 선속도 vX, vY만 사용
+                  false, false, true,  # 각속도 vYaw만 사용
                   false, false, false]
+    odom0_relative: false # 속도 데이터이므로 relative는 상관없음
+
+    # 2. IMU: 주석 처리 확인 (사용 안 함)
+    # imu0: /imu 
+
+    # [방어막] 계산이 튀는 걸 막기 위해 기본 노이즈 값을 강제로 넣습니다.
+    process_noise_covariance: [0.05, 0.0, 0.0, 0.0, 0.0, 0.0,
+                               0.0, 0.05, 0.0, 0.0, 0.0, 0.0,
+                               0.0, 0.0, 0.06, 0.0, 0.0, 0.0,
+                               0.0, 0.0, 0.0, 0.03, 0.0, 0.0,
+                               0.0, 0.0, 0.0, 0.0, 0.03, 0.0,
+                               0.0, 0.0, 0.0, 0.0, 0.0, 0.06]
+
+    iinitial_estimate_covariance: [1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                                  0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
+                                  0.0, 0.0, 1.0, 0.0, 0.0, 0.0,
+                                  0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+                                  0.0, 0.0, 0.0, 0.0, 1.0, 0.0,
+                                  0.0, 0.0, 0.0, 0.0, 0.0, 1.0]
