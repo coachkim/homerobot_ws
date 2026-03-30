@@ -193,12 +193,12 @@ controller_server:
           "PathDist",
           "GoalDist",
         ]
-      BaseObstacle.scale: 0.02
+      BaseObstacle.scale: 0.05
       PathAlign.scale: 32.0
       PathAlign.forward_point_distance: 0.1
       GoalAlign.scale: 24.0
       GoalAlign.forward_point_distance: 0.1
-      PathDist.scale: 32.0
+      PathDist.scale: 24.0
       GoalDist.scale: 24.0
       RotateToGoal.scale: 32.0
       RotateToGoal.slowing_factor: 5.0
@@ -216,12 +216,12 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      # robot_radius: 0.15  <-- 이 줄을 삭제하거나 주석 처리하세요.
+      robot_radius: 0.17  
       footprint: "[ [0.15, 0.11], [0.15, -0.11], [-0.15, -0.11], [-0.15, 0.11] ]" # <-- 이거 추가
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
+        cost_scaling_factor: 10.0
         inflation_radius: 0.25 # [여기 수정] 기본값 0.55m -> 로봇 반지름 + 여유분 정도로 줄여보세요. (예: 0.35)
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
@@ -257,7 +257,7 @@ global_costmap:
       global_frame: map
       robot_base_frame: base_footprint
       use_sim_time: True
-      # robot_radius: 0.15  <-- 이 줄을 삭제하거나 주석 처리하세요.
+      robot_radius: 0.17
       footprint: "[ [0.15, 0.11], [0.15, -0.11], [-0.15, -0.11], [-0.15, 0.11] ]" # <-- 이거 추가
       resolution: 0.05
       track_unknown_space: true
@@ -281,7 +281,7 @@ global_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
+        cost_scaling_factor: 10.0
         inflation_radius: 0.25 # [여기도 수정] 보통 전역 지도와 값을 맞춥니다.
       always_send_full_costmap: True
 
