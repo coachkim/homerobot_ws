@@ -54,9 +54,12 @@ def generate_launch_description():
         package='gazebo_ros',
         executable='spawn_entity.py',
         arguments=[
-            '-topic', 'robot_description', 
+            '-topic', 'robot_description',
             '-entity', 'delivery_robot',
-            '-z', '0.1'  # <--- 이 줄을 꼭 추가해 주세요!
+            '-x', '0.0',   # X 좌표 (0으로 고정)
+            '-y', '0.0',   # Y 좌표 (0으로 고정)
+            '-Y', '0.0',   # Yaw 회전 (0으로 고정, 대문자 Y임에 주의!)
+            '-z', '0.1'
         ],
         output='screen'
     )
