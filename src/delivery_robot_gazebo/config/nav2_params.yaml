@@ -221,8 +221,8 @@ local_costmap:
       plugins: ["voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 10.0
-        inflation_radius: 0.25 # [여기 수정] 기본값 0.55m -> 로봇 반지름 + 여유분 정도로 줄여보세요. (예: 0.35)
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.3 # [여기 수정] 기본값 0.55m -> 로봇 반지름 + 여유분 정도로 줄여보세요. (예: 0.35)
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -281,8 +281,8 @@ global_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 10.0
-        inflation_radius: 0.25 # [여기도 수정] 보통 전역 지도와 값을 맞춥니다.
+        cost_scaling_factor: 3.0
+        inflation_radius: 0.3 # [여기도 수정] 보통 전역 지도와 값을 맞춥니다.
       always_send_full_costmap: True
 
 map_server:
