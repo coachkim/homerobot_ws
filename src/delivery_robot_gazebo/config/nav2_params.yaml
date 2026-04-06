@@ -3,7 +3,7 @@ amcl:
     use_sim_time: True
     alpha1: 0.1
     alpha2: 0.1
-    alpha3: 0.1
+    alpha3: 0.2
     alpha4: 0.1
     alpha5: 0.2
     base_frame_id: "base_footprint"
