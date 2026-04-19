@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "firmware/Homerobot_Motor_Test"
+			"path": "firmware/homerobot_motor_test"
 		}
 	],
 	"settings": {}
